@@ -70,7 +70,7 @@ resource "aws_instance" "frontend" {
 
 resource "aws_route53_record" "frontend" {
   zone_id = var.hosted_zone_id
-  name    = "${var.host_name}.${var.hosted_zone_name}"
+  name    = "${var.hostname}.${var.hosted_zone_name}"
   type    = "A"
   ttl     = 300
   records = [aws_instance.frontend.public_ip]
