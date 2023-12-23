@@ -54,7 +54,6 @@ resource "aws_instance" "frontend" {
   ami           = data.aws_ami.latest.id
   instance_type = var.instance_type
   key_name      = aws_key_pair.auth_key.key_name
-  user_data     = file("setup.sh")
   vpc_security_group_ids = [
     aws_security_group.frontend.id
   ]
