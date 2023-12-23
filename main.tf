@@ -51,7 +51,7 @@ resource "aws_security_group" "frontend" {
 
 
 resource "aws_instance" "frontend" {
-  ami           = var.ami_id
+  ami           = data.aws_ami.latest.id
   instance_type = var.instance_type
   key_name      = aws_key_pair.auth_key.key_name
   user_data     = file("setup.sh")
@@ -66,7 +66,7 @@ resource "aws_instance" "frontend" {
     owner   = var.project_owner
   }
 
-
+}
 
 resource "aws_route53_record" "frontend" {
   zone_id = data.aws_route53_zone.zonedetails.id
