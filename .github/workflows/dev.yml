@@ -35,14 +35,15 @@ jobs:
         
       - name: Terraform plan
         run: terraform plan -var-file=dev.tfvars
-        
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.DEV_AWS_REGION }}
+
       - name: Terraform apply
         run: |
           terraform apply \
             -auto-approve \
             -var-file=dev.tfvars
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.DEV_AWS_REGION }}
+        
 
