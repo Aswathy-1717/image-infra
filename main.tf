@@ -5,7 +5,7 @@ resource "aws_key_pair" "auth_key" {
     Name    = "${var.project_name}-${var.project_env}"
     project = var.project_name
     env     = var.project_env
-    owner   = var.project_owner
+  
   }
 }
 
@@ -63,15 +63,15 @@ resource "aws_instance" "frontend" {
     Name    = "${var.project_name}-${var.project_env}-frontend"
     project = var.project_name
     env     = var.project_env
-    owner   = var.project_owner
+  
   }
 
 }
 
 resource "aws_route53_record" "frontend" {
-  zone_id = data.aws_route53_zone.zonedetails.id
+  zone_id = var.hosted_zone_id
   name    = "${var.host_name}.${var.hosted_zone_name}"
   type    = "A"
   ttl     = 300
-  records = [aws_eip.frontend.public_ip]
+  records = [aws_instance.frontend.public_ip]
 }
